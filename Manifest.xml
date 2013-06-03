@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+	<application>
+	<name>虚拟马甲</name>
+	<alias>vest</alias>
+	<version>1.0</version>
+	<pw-version>9.0</pw-version>
+	<description>虚拟马甲</description>
+	<logo>images/logo.jpg</logo>
+	<type>app</type>
+	<charset>UTF-8</charset>
+	<website>http://www.it68.com.cn</website>
+	<author-name>enj0y</author-name>
+	<author-email>hackes@outlook.com</author-email>
+	<author-icon>your icon</author-icon>
+	</application>
+	<res>res</res>
+	<installation-service>
+	</installation-service>
+	<inject-services>
+	<s_admin_menu>
+		<app_vest>
+			<class>EXT:vest.service.srv.App_Vest_ConfigDo</class>
+			<loadway>load</loadway>
+			<method>getAdminMenu</method>
+			<description>虚拟马甲admin menu</description>
+		</app_vest>
+	</s_admin_menu>
+	<!--
+	<m_PwTopicPost>
+		<app_vest>
+			<class>EXT:vest.service.srv.App_VestPwTopicPostDo</class>
+			<loadway>load</loadway>
+			<description>发帖钩子</description>
+		</app_vest>
+	</m_PwTopicPost>
+	-->
+	<c_post_doadd>
+		<app_vest>
+			<class>EXT:vest.service.srv.App_VestPostAndReplyDoInjector</class>
+			<loadway>load</loadway>
+			<method>doVestPost</method>
+			<expression>config:site.app.vest.ifopen==1</expression>
+			<description>帖子发布 - 虚拟马甲</description>
+		</app_vest>
+	</c_post_doadd>
+	<c_post_doreply>
+		<app_vest>
+			<class>EXT:vest.service.srv.App_VestPostAndReplyDoInjector</class>
+			<loadway>load</loadway>
+			<method>doVestReply</method>
+			<expression>config:site.app.vest.ifopen==1</expression>
+			<description>回复发布 - 虚拟马甲</description>
+		</app_vest>
+	</c_post_doreply>	
+	</inject-services>
+	</manifest>
